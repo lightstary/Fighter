@@ -1,0 +1,52 @@
+using UnityEngine;
+
+public class GameManager : MonoBehaviour
+{
+    [Header("Enemy Prefabs")]
+    public GameObject enemyOnePrefab;
+    public GameObject enemyTwoPrefab;
+    public GameObject enemyThreePrefab;
+
+    [Header("Spawn Intervals (seconds)")]
+    public float enemyOneInterval = 2f;
+    public float enemyTwoInterval = 3.5f;
+    public float enemyThreeInterval = 5f;
+
+    private float timerOne;
+    private float timerTwo;
+    private float timerThree;
+
+    private float horizontalLimit = 9f;
+    private float topSpawnY = 6.5f;
+
+    void Update()
+    {
+        timerOne += Time.deltaTime;
+        timerTwo += Time.deltaTime;
+        timerThree += Time.deltaTime;
+
+        if (timerOne >= enemyOneInterval)
+        {
+            CreateEnemy(enemyOnePrefab);
+            timerOne = 0f;
+        }
+
+        if (timerTwo >= enemyTwoInterval)
+        {
+            CreateEnemy(enemyTwoPrefab);
+            timerTwo = 0f;
+        }
+
+        if (timerThree >= enemyThreeInterval)
+        {
+            CreateEnemy(enemyThreePrefab);
+            timerThree = 0f;
+        }
+    }
+
+    void CreateEnemy(GameObject enemyPrefab)
+    {
+        Vector3 spawnPos = new Vector3(Random.Range(-horizontalLimit, horizontalLimit), topSpawnY, 0);
+        Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
+    }
+}
