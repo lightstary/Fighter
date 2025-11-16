@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 1950933557860916243}
   - component: {fileID: -6142994316405471301}
   - component: {fileID: 3221872000758242448}
+  - component: {fileID: 39856069159752371}
+  - component: {fileID: 4859740424428535134}
   m_Layer: 0
   m_Name: enemy 1
   m_TagString: Untagged
@@ -152,3 +154,33 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &39856069159752371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3936197074130968416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f38858161212d4448b13f8b7cfd8d82b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyOne
+--- !u!114 &4859740424428535134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3936197074130968416}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e08a251b799c43d4cb1e7a6b80616095, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  enemyOnePrefab: {fileID: 0}
+  enemyTwoPrefab: {fileID: 0}
+  enemyThreePrefab: {fileID: 0}
+  enemyOneInterval: 2
+  enemyTwoInterval: 3.5
+  enemyThreeInterval: 5
