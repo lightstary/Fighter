@@ -448,7 +448,8 @@ MonoBehaviour:
     type: 3}
   edgeMargin: 0
   lives: 3
-  score: 0
+  score: 1
+  livesText: {fileID: 0}
 --- !u!65 &594446634
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -817,7 +818,7 @@ GameObject:
   - component: {fileID: 1649373865}
   - component: {fileID: 1649373864}
   m_Layer: 5
-  m_Name: Lives
+  m_Name: lives
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

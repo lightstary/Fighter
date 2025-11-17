@@ -2,6 +2,7 @@ using Mono.Cecil.Cil;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class Player : MonoBehaviour
 
     public int lives = 3;
     public int score = 0;
+    public Text livesText;
 
     private float horizontalInput;
     private float verticalInput;
@@ -38,6 +40,9 @@ public class Player : MonoBehaviour
     {
         Movement();
         Shooting();
+
+        if (livesText != null)
+            livesText.text = "Lives: " + lives;
     }
 
     void Shooting()
