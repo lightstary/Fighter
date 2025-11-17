@@ -99,15 +99,4 @@ public class Player : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        Debug.Log("Triggered: " + other.name);
-
-        if (other.CompareTag("Heart"))
-        {
-            lives = Mathf.Min(3, lives + 1);
-            Destroy(other.gameObject);
-        }
-    }
-
 }
