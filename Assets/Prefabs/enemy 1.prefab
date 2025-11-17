@@ -179,8 +179,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   enemyOnePrefab: {fileID: 3936197074130968416}
-  enemyTwoPrefab: {fileID: 0}
-  enemyThreePrefab: {fileID: 0}
+  enemyTwoPrefab: {fileID: 3936197074130968416, guid: 8dc3e038cb2e4dd4db934a5756747b81,
+    type: 3}
+  enemyThreePrefab: {fileID: 3936197074130968416, guid: a9849813c6d8576438a2609b00ee529f,
+    type: 3}
   enemyOneInterval: 2
   enemyTwoInterval: 3.5
   enemyThreeInterval: 5
