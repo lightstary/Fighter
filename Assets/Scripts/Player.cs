@@ -75,21 +75,5 @@ public class Player : MonoBehaviour
 
         // 6) Convert back to world space at the same depth
         transform.position = cam.ViewportToWorldPoint(vp);
-    
-    void OnTriggerEnter2D(Collider2D other)
-    {
-            if (other.tag == "Heart")
-            {
-                if (lives < 3)
-                {
-                    lives += 1;
-                }
-                else
-                {
-                    score += 1;
-                }
 
-                Destroy(other.gameObject);
-            }
-    }
 }
