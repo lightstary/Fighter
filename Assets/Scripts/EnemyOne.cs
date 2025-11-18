@@ -4,11 +4,7 @@ using UnityEngine;
 
 public class EnemyOne : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
+    public GameObject explosionPrefab;
 
     // Update is called once per frame
     void Update()
@@ -17,6 +13,26 @@ public class EnemyOne : MonoBehaviour
         if (transform.position.y < -6.5f)
         {
             Destroy(this.gameObject);
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            // lose 1 life
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.LoseLife(1);
+            }
+
+            // spawn explosion at this enemy's position
+            if (explosionPrefab != null)
+            {
+                Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+            }
+
+            // destroy this enemy
+            Destroy(gameObject);
         }
     }
 }
