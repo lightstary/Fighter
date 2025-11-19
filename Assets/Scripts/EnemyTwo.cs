@@ -6,6 +6,7 @@ public class EnemyTwo : MonoBehaviour
     public float amplitude = 2f;     // wave width
     public float frequency = 2f;     // wave speed
     private Vector3 startPos;
+    public GameObject explosionPrefab;
 
     void Start()
     {
@@ -19,6 +20,26 @@ public class EnemyTwo : MonoBehaviour
 
         if (transform.position.y < -6.5f)
         {
+            Destroy(gameObject);
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            // lose 1 life
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.LoseLife(1);
+            }
+
+            // spawn explosion at this enemy's position
+            if (explosionPrefab != null)
+            {
+                Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+            }
+
+            // destroy this enemy
             Destroy(gameObject);
         }
     }
