@@ -82,21 +82,21 @@ public class Player : MonoBehaviour
         transform.position = cam.ViewportToWorldPoint(vp);
 
     }
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.tag == "Heart")
+        void OnTriggerEnter2D(Collider2D other)
         {
-            if (lives < 3)
-            {
-                lives += 1;
-            }
-            else
-            {
-                score += 1;
-            }
+            Debug.Log("Triggered: " + other.name);
 
-            Destroy(other.gameObject);
+            if (other.CompareTag("Heart"))
+            {
+                if (lives < 3)
+                {
+                    lives += 1;
+                }
+                else
+                {
+                    score += 1;
+                }
+                Destroy(other.gameObject);
+            }
         }
-    }
-
 }

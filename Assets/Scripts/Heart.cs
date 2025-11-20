@@ -1,17 +1,28 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class Heart : MonoBehaviour
 {
-    public float floatSpeed = 2f;
-    public float lifetime = 5f;
-    void Start()
+    public float lifeTime = 3f;
+    public bool movesLikeEnemy = false;
+    public float moveSpeed = 3f;
+
+    private void Start()
     {
-        Destroy(this.gameObject, 3f);
+        Destroy(gameObject, lifeTime);
     }
 
-    private void Update()
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        transform.Translate(new Vector3(0f, -floatSpeed, 0f) * Time.deltaTime);
-    }
+        if (other.CompareTag("Player"))
+        {
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.AddLifeOrScore();
+            }
 
+            Destroy(gameObject);
+        }
+    }
 }

@@ -1,8 +1,11 @@
-using UnityEngine;
+﻿using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance;
+    public static GameManager Instance { get; private set; }
+    [Header("UI")]
+    public TextMeshProUGUI scoreText;
 
     [Header("Enemy Prefabs")]
     public GameObject enemyOnePrefab;
@@ -14,6 +17,11 @@ public class GameManager : MonoBehaviour
     public float enemyTwoInterval = 3.5f;
     public float enemyThreeInterval = 5f;
 
+    [Header("Score & Lives")]
+    public int score = 0;
+    public int lives = 3;
+    public int maxLives = 3;
+
     private float timerOne;
     private float timerTwo;
     private float timerThree;
@@ -21,11 +29,16 @@ public class GameManager : MonoBehaviour
     private float horizontalLimit = 9f;
     private float topSpawnY = 6.5f;
 
-    private int score = 0;
-
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void Update()
@@ -67,6 +80,30 @@ public class GameManager : MonoBehaviour
     public void AddScore(int amount)
     {
         score += amount;
-        Debug.Log("Score = " + score);
+        if (scoreText != null)
+        {
+            scoreText.text = "Score: " + score;
+        }
+
+        Debug.Log("Score: " + score);
+    }
+    public void AddLifeOrScore()
+    {
+        if (lives < maxLives)
+        {
+            lives++;
+            Debug.Log("Lives: " + lives);
+        }
+        else
+        {
+            AddScore(1);
+        }
+    }
+
+    public void LoseLife(int amount = 1)
+    {
+        lives -= amount;
+        if (lives < 0) lives = 0;
+        Debug.Log("Lives: " + lives);
     }
 }

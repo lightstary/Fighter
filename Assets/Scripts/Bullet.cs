@@ -8,21 +8,20 @@ public class Bullet : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(Vector3.up * speed * Time.deltaTime);
+        transform.Translate(Vector2.up * speed * Time.deltaTime);
+    }
 
-        if (transform.position.y > 6.5f)
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("enemy"))
         {
-            Destroy(gameObject);
+            Destroy(other.gameObject); // kill enemy
+            Destroy(gameObject);       // destroy bullet
         }
     }
 
-    void OnTriggerEnter(Collider other)
+    private void OnBecameInvisible()
     {
-        // If the bullet hits an enemy, destroy both
-        if (other.CompareTag("Enemy"))
-        {
-            Destroy(other.gameObject);
-            Destroy(gameObject);
-        }
+        Destroy(gameObject);
     }
 }
