@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance;
+
     [Header("Enemy Prefabs")]
     public GameObject enemyOnePrefab;
     public GameObject enemyTwoPrefab;
@@ -19,7 +21,14 @@ public class GameManager : MonoBehaviour
     private float horizontalLimit = 9f;
     private float topSpawnY = 6.5f;
 
-    void Update()
+    private int score = 0;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+    private void Update()
     {
         timerOne += Time.deltaTime;
         timerTwo += Time.deltaTime;
@@ -44,9 +53,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void CreateEnemy(GameObject enemyPrefab)
+    private void CreateEnemy(GameObject enemyPrefab)
     {
-        Vector3 spawnPos = new Vector3(Random.Range(-horizontalLimit, horizontalLimit), topSpawnY, 0);
+        Vector3 spawnPos = new Vector3(
+            Random.Range(-horizontalLimit, horizontalLimit),
+            topSpawnY,
+            0f
+        );
+
         Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
+    }
+
+    public void AddScore(int amount)
+    {
+        score += amount;
+        Debug.Log("Score = " + score);
     }
 }
