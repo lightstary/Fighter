@@ -28,6 +28,9 @@ public class Player : MonoBehaviour
     void Start()
     {
         cam = Camera.main;
+
+        audioSource = GetComponent<AudioSource>();
+
         if (cam == null)
         {
             Debug.LogError("Player: No Main Camera found.");
@@ -35,6 +38,13 @@ public class Player : MonoBehaviour
             return;
         }
     }
+
+    [Header("Audio")]
+    public AudioClip coinSound;
+    public AudioClip heartSound;
+
+    private AudioSource audioSource;
+
 
     void Update()
     {
@@ -82,21 +92,39 @@ public class Player : MonoBehaviour
         transform.position = cam.ViewportToWorldPoint(vp);
 
     }
-        void OnTriggerEnter2D(Collider2D other)
-        {
-            Debug.Log("Triggered: " + other.name);
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log("Triggered: " + other.name);
 
-            if (other.CompareTag("Heart"))
+        if (other.CompareTag("Heart"))
+        {
+            if (lives < 3)
             {
-                if (lives < 3)
-                {
-                    lives += 1;
-                }
-                else
-                {
-                    score += 1;
-                }
-                Destroy(other.gameObject);
+                lives += 1;
+
+                if (heartSound != null)
+                    audioSource.PlayOneShot(heartSound);
             }
+            else
+            {
+                score += 1;
+
+                if (coinSound != null)
+                    audioSource.PlayOneShot(coinSound);
+            }
+
+            Destroy(other.gameObject);
         }
+
+        if (other.CompareTag("Coin"))
+        {
+            score += 1;
+
+            if (coinSound != null)
+                audioSource.PlayOneShot(coinSound);
+
+            Destroy(other.gameObject);
+        }
+    }
+
 }

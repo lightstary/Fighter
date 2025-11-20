@@ -472,6 +472,7 @@ GameObject:
   - component: {fileID: 594446633}
   - component: {fileID: 594446639}
   - component: {fileID: 594446638}
+  - component: {fileID: 594446640}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -495,6 +496,11 @@ MonoBehaviour:
   bulletPrefab: {fileID: 3936197074130968416, guid: 8dc3e038cb2e4dd4db934a5756747b81,
     type: 3}
   edgeMargin: 0
+  lives: 3
+  score: 0
+  livesText: {fileID: 0}
+  coinSound: {fileID: 8300000, guid: 7742ebd4ad3ae8d4bb08dc92aa049ce8, type: 3}
+  heartSound: {fileID: 8300000, guid: 06751e8b3d3d4ea4f86cb5ec8e5ab87f, type: 3}
 --- !u!23 &594446635
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -639,6 +645,103 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!82 &594446640
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 594446631}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &614834747
 GameObject:
   m_ObjectHideFlags: 0
@@ -668,15 +771,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e08a251b799c43d4cb1e7a6b80616095, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  enemyOnePrefab: {fileID: 3936197074130968416, guid: 3c6c3a6129db62a4db1c6218d43505c6,
+  scoreText: {fileID: 1516874805}
+  enemyOnePrefab: {fileID: 3936197074130968416, guid: 39c7e03153d73384fb2aa34505a9cb12,
     type: 3}
-  enemyTwoPrefab: {fileID: 3936197074130968416, guid: 8dc3e038cb2e4dd4db934a5756747b81,
+  enemyTwoPrefab: {fileID: 3936197074130968416, guid: c3a250595e9158840b6d78cd0d878ada,
     type: 3}
-  enemyThreePrefab: {fileID: 3936197074130968416, guid: a9849813c6d8576438a2609b00ee529f,
+  enemyThreePrefab: {fileID: 3936197074130968416, guid: 24698fc845aa70a419fc47e88fba76ee,
     type: 3}
   enemyOneInterval: 2
   enemyTwoInterval: 3.5
   enemyThreeInterval: 5
+  score: 0
+  lives: 3
+  maxLives: 3
 --- !u!4 &614834749
 Transform:
   m_ObjectHideFlags: 0
