@@ -1,8 +1,6 @@
-using Mono.Cecil.Cil;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -16,43 +14,69 @@ public class Player : MonoBehaviour
     [Tooltip("Tiny padding inside the edges (in viewport %). 0 = exact edge.")]
     [Range(0f, 0.05f)] public float edgeMargin = 0f;
 
-    public int lives = 3;
-    public int score = 0;
-    public Text livesText;
-
     private float horizontalInput;
     private float verticalInput;
 
     private Camera cam;
 
+    public GameObject ShieldPowerUp;
+    public float shieldDuration = 5f;
+
+    bool shiledActive = false;
+    float timer = 0f;
+
     void Start()
     {
         cam = Camera.main;
-
-        audioSource = GetComponent<AudioSource>();
-
         if (cam == null)
         {
             Debug.LogError("Player: No Main Camera found.");
             enabled = false;
             return;
         }
+
+        if (ShieldPowerUp != null)
+        {
+            ShieldPowerUp.SetActive(false);
+        }
     }
-
-    [Header("Audio")]
-    public AudioClip coinSound;
-    public AudioClip heartSound;
-
-    private AudioSource audioSource;
-
 
     void Update()
     {
         Movement();
         Shooting();
 
-        if (livesText != null)
-            livesText.text = "Lives: " + lives;
+        if (shiledActive)
+        {
+            timer += Time.deltaTime;
+            if (timer <= 0)
+                DisableShield();
+        }
+    }
+
+    public void ActivateShield(float duration)
+    {
+        shiledActive = true;
+        timer = duration;
+        if (ShieldPowerUp != null)
+        {
+            ShieldPowerUp.SetActive(true);
+        }
+    }
+
+    void DisableShield()
+    {
+        shiledActive = false;
+        timer = 0f;
+        if (ShieldPowerUp != null)
+        {
+            ShieldPowerUp.SetActive(false);
+        }
+    }
+
+    public bool IsShieldActive()
+    {
+        return shiledActive;
     }
 
     void Shooting()
@@ -90,41 +114,5 @@ public class Player : MonoBehaviour
 
         // 6) Convert back to world space at the same depth
         transform.position = cam.ViewportToWorldPoint(vp);
-
     }
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        Debug.Log("Triggered: " + other.name);
-
-        if (other.CompareTag("Heart"))
-        {
-            if (lives < 3)
-            {
-                lives += 1;
-
-                if (heartSound != null)
-                    audioSource.PlayOneShot(heartSound);
-            }
-            else
-            {
-                score += 1;
-
-                if (coinSound != null)
-                    audioSource.PlayOneShot(coinSound);
-            }
-
-            Destroy(other.gameObject);
-        }
-
-        if (other.CompareTag("Coin"))
-        {
-            score += 1;
-
-            if (coinSound != null)
-                audioSource.PlayOneShot(coinSound);
-
-            Destroy(other.gameObject);
-        }
-    }
-
 }
