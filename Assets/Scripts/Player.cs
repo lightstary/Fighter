@@ -21,6 +21,10 @@ public class Player : MonoBehaviour
 
     public GameObject ShieldPowerUp;
     public float shieldDuration = 5f;
+    [Header("Audio")]
+    public AudioSource shieldPickupSound;
+    public AudioSource shieldEndSound;
+
 
     bool shiledActive = false;
     float timer = 0f;
@@ -58,21 +62,26 @@ public class Player : MonoBehaviour
     {
         shiledActive = true;
         timer = duration;
+
         if (ShieldPowerUp != null)
-        {
             ShieldPowerUp.SetActive(true);
-        }
+
+        if (shieldPickupSound != null)
+            shieldPickupSound.Play();
     }
 
     void DisableShield()
     {
         shiledActive = false;
         timer = 0f;
+
         if (ShieldPowerUp != null)
-        {
             ShieldPowerUp.SetActive(false);
-        }
+
+        if (shieldEndSound != null)
+            shieldEndSound.Play();
     }
+
 
     public bool IsShieldActive()
     {
