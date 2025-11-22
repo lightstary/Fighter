@@ -9,23 +9,27 @@ public class ShieldPowerUp : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Player shield = other.GetComponent<Player>();
+        Player player = other.GetComponent<Player>();
 
-        transform.Translate(Vector3.up * speed * Time.deltaTime);
-
-        if (shield != null)
+        if (player != null)
         {
-            shield.ActivateShield(shieldTime);
+            player.ActivateShield(shieldTime);
+            Destroy(gameObject);
+            return;
+        }
+
+        if (other.CompareTag("Enemy"))
+        {
+            Destroy(other.gameObject);
             Destroy(gameObject);
         }
-
-
-        {
-            if (other.CompareTag("Enemy"))
-            {
-                Destroy(other.gameObject);
-                Destroy(gameObject);
-            }
-        }
     }
+
+    public float lifeTime = 5f;
+
+    private void Start()
+    {
+        Destroy(gameObject, lifeTime);
+    }
+
 }

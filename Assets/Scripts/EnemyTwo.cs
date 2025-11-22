@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class EnemyTwo : MonoBehaviour
 {
-    public float speed = 2.5f;       // vertical speed
-    public float amplitude = 2f;     // wave width
-    public float frequency = 2f;     // wave speed
+    public float speed = 2.5f;
+    public float amplitude = 2f;
+    public float frequency = 2f;
     private Vector3 startPos;
     public GameObject explosionPrefab;
 
@@ -23,24 +23,24 @@ public class EnemyTwo : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public void Die()
+    {
+        if (explosionPrefab != null)
+        {
+            Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+        }
+
+        Destroy(gameObject);
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            // lose 1 life
-            if (GameManager.Instance != null)
-            {
-                GameManager.Instance.LoseLife(1);
-            }
-
-            // spawn explosion at this enemy's position
-            if (explosionPrefab != null)
-            {
-                Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-            }
-
-            // destroy this enemy
-            Destroy(gameObject);
+            GameManager.Instance?.LoseLife(1);
+            Die();
         }
     }
 }
+

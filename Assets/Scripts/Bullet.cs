@@ -15,10 +15,19 @@ public class Bullet : MonoBehaviour
     {
         if (other.CompareTag("enemy"))
         {
-            Destroy(other.gameObject); // kill enemy
-            Destroy(gameObject);       // destroy bullet
+            var enemy = other.GetComponent<EnemyOne>();
+            if (enemy != null) { enemy.Die(); }
+
+            var enemy2 = other.GetComponent<EnemyTwo>();
+            if (enemy2 != null) { enemy2.Die(); }
+
+            var enemy3 = other.GetComponent<EnemyThree>();
+            if (enemy3 != null) { enemy3.Die(); }
+
+            Destroy(gameObject);
         }
     }
+
 
     private void OnBecameInvisible()
     {

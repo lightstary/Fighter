@@ -1,11 +1,9 @@
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
 
-public class PowerupSpawner : MonoBehaviour
+public class ShieldSpawner : MonoBehaviour
 {
-    public GameObject heartPrefab;
-    public float spawnInterval = 8f;   // seconds between hearts
+    public GameObject shieldPrefab;
+    public float spawnInterval = 10f;
 
     private float timer;
 
@@ -15,12 +13,12 @@ public class PowerupSpawner : MonoBehaviour
 
         if (timer >= spawnInterval)
         {
-            SpawnHeart();
+            SpawnShield();
             timer = 0f;
         }
     }
 
-    void SpawnHeart()
+    void SpawnShield()
     {
         Camera cam = Camera.main;
         if (cam == null) return;
@@ -32,6 +30,6 @@ public class PowerupSpawner : MonoBehaviour
         Vector3 worldPos = cam.ViewportToWorldPoint(vp);
         worldPos.z = 0f;
 
-        Instantiate(heartPrefab, worldPos, Quaternion.identity);
+        Instantiate(shieldPrefab, worldPos, Quaternion.identity);
     }
 }
